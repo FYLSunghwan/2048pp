@@ -11,7 +11,7 @@ class Block
     int GetNum() const;
     BlockState GetState() const;
     void SetState(BlockState state);
-    Block& operator+(const Block& rhs);
+    void operator+=(const Block& rhs);
 
  private:
     Block();

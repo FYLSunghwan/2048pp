@@ -10,13 +10,4 @@ enum class BlockState
     RIGHT
 };
 
-enum class KeyState
-{
-    INVALID,
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-}
-
 #endif

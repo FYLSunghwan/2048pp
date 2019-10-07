@@ -10,11 +10,12 @@ class Board
  public:
     Board(size_t rowSize, size_t colSize);
     ~Board();
+    bool AddBlock();
     void SetState(BlockState state);
-    void UpdateBoard();
+    bool UpdateBoard();
     int GetTotalScore() const;
     Block* GetBlock(size_t y, size_t x);
-    
+    void SetBlock(size_t y, size_t x, Block* block);
 
  private:
     Board();

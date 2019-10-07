@@ -23,7 +23,7 @@ void Block::SetState(BlockState state)
     m_state = state;
 }
 
-Block& Block::operator+(const Block& rhs)
+void Block::operator+=(const Block& rhs)
 {
     m_num += rhs.GetNum();
     m_state = rhs.GetState();
