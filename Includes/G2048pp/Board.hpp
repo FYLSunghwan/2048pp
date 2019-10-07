@@ -13,13 +13,15 @@ class Board
     void SetState(BlockState state);
     void UpdateBoard();
     int GetTotalScore() const;
-    Block& GetBlock(size_t y, size_t x);
+    Block* GetBlock(size_t y, size_t x);
     
 
  private:
     Board();
     int totScore;
-    std::vector<Block*> m_board; 
+    std::vector<Block*> m_board;
+    size_t m_rowSize;
+    size_t m_colSize;
 };
 
 #endif
