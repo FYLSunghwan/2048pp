@@ -1,4 +1,4 @@
-#include <Block.hpp>
+#include <G2048pp/Block.hpp>
 
 Block::Block(BlockState state)
 {
@@ -16,6 +16,11 @@ int Block::GetNum() const
 BlockState Block::GetState() const 
 {
     return m_state;
+}
+
+void Block::SetState(BlockState state)
+{
+    m_state = state;
 }
 
 Block& Block::operator+(const Block& rhs)

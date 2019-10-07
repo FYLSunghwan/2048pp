@@ -10,6 +10,7 @@ class Block
     Block(BlockState state);
     int GetNum() const;
     BlockState GetState() const;
+    void SetState(BlockState state);
     Block& operator+(const Block& rhs);
 
  private:
