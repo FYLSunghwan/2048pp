@@ -2,11 +2,30 @@
 #include <effolkronium/random.hpp>
 #include <iostream>
 #include <cstdlib>
-#include <conio.h>
+#include <term.h>
+#include <termios.h>
+#include <unistd.h>
+
+char getch(void)  
+{  
+  char ch;  
+  struct termios buf;  
+  struct termios save;  
+  
+   tcgetattr(0, &save);  
+   buf = save;  
+   buf.c_lflag &= ~(ICANON|ECHO);  
+   buf.c_cc[VMIN] = 1;  
+   buf.c_cc[VTIME] = 0;  
+   tcsetattr(0, TCSAFLUSH, &buf);  
+   ch = getchar();  
+   tcsetattr(0, TCSAFLUSH, &save);  
+   return ch;  
+}  
 
 void Game::PrintBoard()
 {
-    system("cls");
+    system("clear");
     std::cout << "PRESS P TO EXIT\n";
     std::cout << "-------------------------------------\n";
     for(size_t y_ = 0; y_ < m_rowSize; ++y_)
@@ -26,13 +45,13 @@ void Game::PlayGame()
 {
     std::cout << "WELCOME TO 2048pp" << std::endl;
     std::cout << "PRESS ANY KEY" << std::endl;
-    _getch();
+    getch();
 
     board.AddBlock();
     Game::PrintBoard();
     while(true)
     {
-        char inp = _getch();
+        char inp = getch();
         if(inp == 'q') break;
 
         BlockState state;
