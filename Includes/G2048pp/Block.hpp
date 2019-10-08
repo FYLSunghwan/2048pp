@@ -7,15 +7,10 @@
 class Block
 {
  public:
-    Block(BlockState state);
-    int GetNum() const;
-    BlockState GetState() const;
-    void SetState(BlockState state);
-    void operator+=(const Block& rhs);
-
- private:
     Block();
-    BlockState m_state;
+    int GetNum() const;
+    void DoubleNum();
+ private:
     int m_num;
 };
 

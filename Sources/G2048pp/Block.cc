@@ -1,10 +1,8 @@
 #include <G2048pp/Block.hpp>
 
-Block::Block(BlockState state)
+Block::Block()
 {
     using Random = effolkronium::random_static;
-
-    m_state = state;
     m_num = Random::get(1,2);
 }
 
@@ -13,18 +11,7 @@ int Block::GetNum() const
     return m_num;
 }
 
-BlockState Block::GetState() const 
+void Block::DoubleNum()
 {
-    return m_state;
-}
-
-void Block::SetState(BlockState state)
-{
-    m_state = state;
-}
-
-void Block::operator+=(const Block& rhs)
-{
-    m_num += rhs.GetNum();
-    m_state = rhs.GetState();
+    m_num *= 2;
 }

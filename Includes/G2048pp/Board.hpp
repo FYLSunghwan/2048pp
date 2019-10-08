@@ -16,6 +16,7 @@ class Board
     int GetTotalScore() const;
     Block* GetBlock(size_t y, size_t x);
     void SetBlock(size_t y, size_t x, Block* block);
+    void DelBlock(size_t y, size_t x, bool delPtr = true);
 
  private:
     Board();
@@ -23,6 +24,7 @@ class Board
     std::vector<Block*> m_board;
     size_t m_rowSize;
     size_t m_colSize;
+    BlockState m_state;
 };
 
 #endif
