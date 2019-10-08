@@ -62,25 +62,25 @@ bool Board::UpdateBoard()
     {
         for(size_t col = 0; col < m_colSize; col++)
         {
-            for(size_t row = 0; row < m_rowSize; row++)
+            for(size_t row = m_rowSize-2; row >= 0; row--)
             {
-                for(size_t iter = m_rowSize-1 ; iter > row; iter--)
+                for(size_t iter = row ; iter < m_rowSize-1; iter++)
                 {
-                    Block* curBlock = GetBlock(iter-1, col);
-                    Block* nextBlock = GetBlock(iter, col);
+                    Block* curBlock = GetBlock(iter, col);
+                    Block* nextBlock = GetBlock(iter+1, col);
 
                     if(curBlock == nullptr) break;
                     if(nextBlock == nullptr)
                     {
                         isMoved = true;
-                        SetBlock(iter, col, curBlock);
-                        DelBlock(iter-1, col, false);
+                        SetBlock(iter+1, col, curBlock);
+                        DelBlock(iter, col, false);
                     }
                     else if(nextBlock->GetNum() == curBlock->GetNum())
                     {
                         isMoved = true;
                         nextBlock->DoubleNum();
-                        DelBlock(iter-1, col, true);
+                        DelBlock(iter, col, true);
                     }
                     else break;
                 }
