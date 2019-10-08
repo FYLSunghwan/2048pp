@@ -2,31 +2,13 @@
 #include <effolkronium/random.hpp>
 #include <iostream>
 #include <cstdlib>
-#include <term.h>
-#include <termios.h>
+#include <conio.h>
 #include <unistd.h>
-
-char getch(void)  
-{  
-  char ch;  
-  struct termios buf;  
-  struct termios save;  
-  
-   tcgetattr(0, &save);  
-   buf = save;  
-   buf.c_lflag &= ~(ICANON|ECHO);  
-   buf.c_cc[VMIN] = 1;  
-   buf.c_cc[VTIME] = 0;  
-   tcsetattr(0, TCSAFLUSH, &buf);  
-   ch = getchar();  
-   tcsetattr(0, TCSAFLUSH, &save);  
-   return ch;  
-}  
 
 void Game::PrintBoard()
 {
-    system("clear");
-    std::cout << "PRESS P TO EXIT\n";
+    system("cls");
+    std::cout << "PRESS Q TO EXIT\n";
     std::cout << "-------------------------------------\n";
     for(size_t y_ = 0; y_ < m_rowSize; ++y_)
     {
@@ -47,7 +29,7 @@ void Game::PlayGame()
     std::cout << "PRESS ANY KEY" << std::endl;
     getch();
 
-    board.AddBlock();
+    board.AddBlock(true);
     Game::PrintBoard();
     while(true)
     {
@@ -64,10 +46,11 @@ void Game::PlayGame()
         if(state == BlockState::NONE) continue;
 
         board.SetState(state);
-        board.UpdateBoard();
+        bool isMoved = board.UpdateBoard();
         score = board.GetTotalScore();
 
-        if(!board.AddBlock()) break;
+        bool isFull = !board.AddBlock(isMoved);
+        if(isFull) break;
         Game::PrintBoard();
     }
 }
