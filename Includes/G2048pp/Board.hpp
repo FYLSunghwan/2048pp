@@ -8,22 +8,23 @@
 class Board
 {
  public:
-    Board(size_t rowSize, size_t colSize);
+    Board(int rowSize, int colSize);
     ~Board();
-    bool AddBlock();
-    void SetState(BlockState state);
+    bool AddBlock(bool isMoved);
+    void SetState(const BlockState state);
+    bool MoveBlock(const BlockState state);
     bool UpdateBoard();
     int GetTotalScore() const;
-    Block* GetBlock(size_t y, size_t x);
-    void SetBlock(size_t y, size_t x, Block* block);
-    void DelBlock(size_t y, size_t x, bool delPtr = true);
+    Block* GetBlock(const size_t y, const size_t x);
+    void SetBlock(const size_t y, const size_t x, Block* block);
+    void DelBlock(const size_t y, const size_t x, bool delPtr = true);
 
  private:
     Board();
     int totScore;
     std::vector<Block*> m_board;
-    size_t m_rowSize;
-    size_t m_colSize;
+    int m_rowSize;
+    int m_colSize;
     BlockState m_state;
 };
 

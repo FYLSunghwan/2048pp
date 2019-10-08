@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-Board::Board(size_t rowSize, size_t colSize)
+Board::Board(int rowSize, int colSize)
 {
     totScore = 0;
     m_rowSize = rowSize;
@@ -23,7 +23,7 @@ Board::~Board()
     }
 }
 
-bool Board::AddBlock()
+bool Board::AddBlock(bool isMoved)
 {
     using Random = effolkronium::random_static;
     
@@ -41,30 +41,29 @@ bool Board::AddBlock()
             }
         }
     }
-    if(isEmptyExist)
+    if(isEmptyExist && isMoved)
     {
-        size_t idx = Random::get(0lu, idxs.size()-1);
+        size_t idx = Random::get<std::size_t>(0, idxs.size()-1);
         m_board[idxs[idx]] = new Block;
     }
     return isEmptyExist;
 }
 
-void Board::SetState(BlockState state)
+void Board::SetState(const BlockState state)
 {
     m_state = state;
 }
 
-bool Board::UpdateBoard()
+bool Board::MoveBlock(const BlockState state)
 {
     bool isMoved = false;
-    
     if(m_state == BlockState::DOWN)
     {
-        for(size_t col = 0; col < m_colSize; col++)
+        for(int col = 0; col < m_colSize; col++)
         {
-            for(size_t row = m_rowSize-2; row >= 0; row--)
+            for(int row = m_rowSize-2; row >= 0; row--)
             {
-                for(size_t iter = row ; iter < m_rowSize-1; iter++)
+                for(int iter = row ; iter < m_rowSize-1; iter++)
                 {
                     Block* curBlock = GetBlock(iter, col);
                     Block* nextBlock = GetBlock(iter+1, col);
@@ -88,7 +87,103 @@ bool Board::UpdateBoard()
         }
     }
 
+    if(m_state == BlockState::UP)
+    {
+        for(int col = 0; col < m_colSize; col++)
+        {
+            for(int row = 1; row < m_rowSize; row++)
+            {
+                for(int iter = row ; iter > 0; iter--)
+                {
+                    Block* curBlock = GetBlock(iter, col);
+                    Block* nextBlock = GetBlock(iter-1, col);
+
+                    if(curBlock == nullptr) break;
+                    if(nextBlock == nullptr)
+                    {
+                        isMoved = true;
+                        SetBlock(iter-1, col, curBlock);
+                        DelBlock(iter, col, false);
+                    }
+                    else if(nextBlock->GetNum() == curBlock->GetNum())
+                    {
+                        isMoved = true;
+                        nextBlock->DoubleNum();
+                        DelBlock(iter, col, true);
+                    }
+                    else break;
+                }
+            }
+        }
+    }
+
+    if(m_state == BlockState::RIGHT)
+    {
+        for(int row = 0; row < m_rowSize; row++)
+        {
+            for(int col = m_colSize-2; col >= 0; col--)
+            {
+                for(int iter = col ; iter < m_colSize-1; iter++)
+                {
+                    Block* curBlock = GetBlock(row, iter);
+                    Block* nextBlock = GetBlock(row, iter+1);
+
+                    if(curBlock == nullptr) break;
+                    if(nextBlock == nullptr)
+                    {
+                        isMoved = true;
+                        SetBlock(row, iter+1, curBlock);
+                        DelBlock(row, iter, false);
+                    }
+                    else if(nextBlock->GetNum() == curBlock->GetNum())
+                    {
+                        isMoved = true;
+                        nextBlock->DoubleNum();
+                        DelBlock(row, iter, true);
+                    }
+                    else break;
+                }
+            }
+        }
+    }
+
+    if(m_state == BlockState::LEFT)
+    {
+        for(int row = 0; row < m_rowSize; row++)
+        {
+            for(int col = 1; col < m_colSize; col++)
+            {
+                for(int iter = col ; iter > 0; iter--)
+                {
+                    Block* curBlock = GetBlock(row, iter);
+                    Block* nextBlock = GetBlock(row, iter-1);
+
+                    if(curBlock == nullptr) break;
+                    if(nextBlock == nullptr)
+                    {
+                        isMoved = true;
+                        SetBlock(row, iter-1, curBlock);
+                        DelBlock(row, iter, false);
+                    }
+                    else if(nextBlock->GetNum() == curBlock->GetNum())
+                    {
+                        isMoved = true;
+                        nextBlock->DoubleNum();
+                        DelBlock(row, iter, true);
+                    }
+                    else break;
+                }
+            }
+        }
+    }
     return isMoved;
+}
+
+bool Board::UpdateBoard()
+{
+    bool newState = MoveBlock(m_state);
+    if(!newState) m_state = BlockState::NONE;
+    return newState;
 }
 
 int Board::GetTotalScore() const
@@ -96,17 +191,17 @@ int Board::GetTotalScore() const
     return totScore;
 }
 
-Block* Board::GetBlock(size_t y, size_t x)
+Block* Board::GetBlock(const size_t y, const size_t x)
 {
     return m_board[m_colSize * y + x];
 }
 
-void Board::SetBlock(size_t y, size_t x, Block* block)
+void Board::SetBlock(const size_t y, const size_t x, Block* block)
 {
     m_board[m_colSize * y + x] = block;
 }
 
-void Board::DelBlock(size_t y, size_t x, bool delPtr)
+void Board::DelBlock(const size_t y, const size_t x, bool delPtr)
 {
     if(m_board[m_colSize * y + x] != nullptr)
     {

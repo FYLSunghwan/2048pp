@@ -7,7 +7,7 @@ class Game
 {
  public:
     Game() = delete;
-    Game(size_t rowSize, size_t colSize)
+    Game(int rowSize, int colSize)
     :board(rowSize, colSize),
      score(0),
      m_rowSize(rowSize),
@@ -21,8 +21,8 @@ class Game
  private:
     Board board;
     int score;
-    size_t m_rowSize;
-    size_t m_colSize;
+    int m_rowSize;
+    int m_colSize;
 };
 
 #endif
