@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <conio.h>
-#include <unistd.h>
 
 void Game::PrintBoard()
 {
