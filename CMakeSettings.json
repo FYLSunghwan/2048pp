@@ -1,73 +1,28 @@
 {
-    "configurations": [
-      {
-        "name": "x64-Debug",
-        "generator": "Ninja",
-        "configurationType": "Debug",
-        "inheritEnvironments": [ "clang_cl_x64" ],
-        "buildRoot": "${projectDir}\\build\\${name}",
-        "installRoot": "${projectDir}\\out\\install\\${name}",
-        "cmakeCommandArgs": "",
-        "buildCommandArgs": "-v",
-        "ctestCommandArgs": "",
-        "variables": [
-          {
-            "name": "BUILD_SHARED_LIBS",
-            "value": "False",
-            "type": "BOOL"
-          },
-          {
-            "name": "SFML_BUILD_AUDIO",
-            "value": "False",
-            "type": "BOOL"
-          }
-        ]
-      },
-      {
-        "name": "x64-Release",
-        "generator": "Ninja",
-        "configurationType": "RelWithDebInfo",
-        "buildRoot": "${projectDir}\\build\\${name}",
-        "installRoot": "${projectDir}\\out\\install\\${name}",
-        "cmakeCommandArgs": "",
-        "buildCommandArgs": "-v",
-        "ctestCommandArgs": "",
-        "inheritEnvironments": [ "clang_cl_x64" ],
-        "variables": [
-          {
-            "name": "BUILD_SHARED_LIBS",
-            "value": "False",
-            "type": "BOOL"
-          },
-          {
-            "name": "SFML_BUILD_AUDIO",
-            "value": "False",
-            "type": "BOOL"
-          }
-        ]
-      },
-      {
-        "name": "x64-Release-msvc",
-        "generator": "Ninja",
-        "configurationType": "RelWithDebInfo",
-        "buildRoot": "${projectDir}\\build\\${name}",
-        "installRoot": "${projectDir}\\out\\install\\${name}",
-        "cmakeCommandArgs": "",
-        "buildCommandArgs": "-v",
-        "ctestCommandArgs": "",
-        "inheritEnvironments": [ "msvc_x86_x64" ],
-        "variables": [
-          {
-            "name": "BUILD_SHARED_LIBS",
-            "value": "False",
-            "type": "BOOL"
-          },
-          {
-            "name": "SFML_BUILD_AUDIO",
-            "value": "False",
-            "type": "BOOL"
-          }
-        ]
-      }
-    ]
-  }
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": "",
+      "variables": []
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": []
+    }
+  ]
+}
