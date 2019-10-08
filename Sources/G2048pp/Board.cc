@@ -42,7 +42,7 @@ bool Board::AddBlock()
     }
     if(isEmptyExist)
     {
-        size_t idx = Random::get(0u, idxs.size()-1);
+        size_t idx = Random::get(0lu, idxs.size()-1);
         m_board[idx] = new Block(BlockState::NONE);
     }
     return isEmptyExist;
