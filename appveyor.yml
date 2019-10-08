@@ -31,7 +31,7 @@ before_build:
   - cmake .. -G "%CMAKE_GENERATOR%" -A x64
 
 build:
-  project: C:\2048pp\build\Aichu.sln
+  project: C:\2048pp\build\2048pp.sln
   parallel: true
   verbosity: normal
 
