@@ -1,0 +1,39 @@
+version: 0.4 ({build})
+
+skip_branch_with_pr: true
+
+image:
+  - Visual Studio 2017
+  - Visual Studio 2019
+
+platform:
+  - x64
+
+matrix:
+  fast_finish: true
+
+configuration:
+  - Release
+
+clone_folder: C:\2048pp
+
+install:
+  - git submodule update --init
+  - ps: |
+      if ("$env:APPVEYOR_BUILD_WORKER_IMAGE" -eq "Visual Studio 2017") {
+        $env:CMAKE_GENERATOR = "Visual Studio 15 2017"
+      } else {
+        $env:CMAKE_GENERATOR = "Visual Studio 16 2019"
+      }
+before_build:
+  - md C:\2048pp\build
+  - cd C:\2048pp\build
+  - cmake .. -G "%CMAKE_GENERATOR%" -A x64
+
+build:
+  project: C:\2048pp\build\Aichu.sln
+  parallel: true
+  verbosity: normal
+
+after_build:
+  - C:\2048pp\build\bin\Release\UnitTest.exe
