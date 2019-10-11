@@ -31,3 +31,10 @@ include_directories(Libraries/random/include)
 # Project modules
 add_subdirectory(Sources/G2048pp)
 add_subdirectory(UnitTest)
+
+# Code coverage
+option(BUILD_COVERAGE "Build code coverage" OFF)
+if(CMAKE_BUILD_TYPE MATCHES Debug AND CMAKE_COMPILER_IS_GNUCXX AND BUILD_COVERAGE)
+    include(CMake/CodeCoverage.cmake)
+    setup_target_for_coverage(${PROJECT_NAME}_coverage UnitTest coverage)
+endif()
