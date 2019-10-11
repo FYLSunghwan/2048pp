@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-LABEL maintainer "FYLSunghwan <sunghwan519@hotmail.com>"
+LABEL maintainer "sunghwan19 <sunghwan519@hotmail.com>"
 
 RUN apt-get update && apt-get install -y \
 	build-essential \
