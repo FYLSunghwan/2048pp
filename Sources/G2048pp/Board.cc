@@ -29,9 +29,9 @@ bool Board::AddBlock(bool isMoved)
     
     bool isEmptyExist = false;
     std::vector<size_t> idxs;
-    for(size_t y_ = 0; y_ < m_rowSize; ++y_)
+    for(int y_ = 0; y_ < m_rowSize; ++y_)
     {
-        for(size_t x_ = 0; x_ < m_colSize; ++x_)
+        for(int x_ = 0; x_ < m_colSize; ++x_)
         {
             Block* curBlock = GetBlock(y_, x_);
             if(curBlock == nullptr)
