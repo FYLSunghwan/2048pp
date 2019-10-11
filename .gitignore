@@ -46,5 +46,6 @@ build
 # OSX files
 .DS_Store
 
-# VSCode files
+# VS files
 .vscode
+.vs
