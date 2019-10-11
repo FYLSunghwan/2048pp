@@ -3,7 +3,7 @@
 Block::Block()
 {
     using Random = effolkronium::random_static;
-    m_num = Random::get(1,2);
+    m_num = 2 * Random::get(1,2);
 }
 
 int Block::GetNum() const
