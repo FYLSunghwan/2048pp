@@ -15,10 +15,7 @@ class Game
     {
        // Do Nothing
     };
-    char GetKey();
-    void ClearScreen();
     void PrintBoard();
-    void MenuScreen();
     void PlayGame();
 
  private:
