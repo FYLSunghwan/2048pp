@@ -11,7 +11,6 @@ void Game::ClearScreen()
 }
 
 #else
-#include <term.h>  
 #include <termios.h>  
 #include <unistd.h> 
 
