@@ -18,15 +18,20 @@ set(BUILD_GTEST ON CACHE BOOL "" FORCE)
 set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(Libraries/googletest)
-add_subdirectory(Libraries/random)
+
+cmake_policy(SET CMP0063 NEW)
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 
 # Set enable output of compile commands during generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Includes
 include_directories(Includes)
-include_directories(Libraries)
 include_directories(Libraries/random/include)
+
+# Compile options
+include(CMake/CompileOptions.cmake)
 
 # Project modules
 add_subdirectory(Sources/G2048pp)
