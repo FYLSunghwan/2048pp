@@ -40,7 +40,7 @@ char getch(void)
 
 void Game::PrintBoard()
 {
-    system("cls");
+    Game::ClearScreen();
     std::cout << "PRESS Q TO EXIT\n";
     std::cout << "-------------------------------------\n";
     for(int y_ = 0; y_ < m_rowSize; ++y_)
