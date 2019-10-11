@@ -9,4 +9,4 @@ else
     docker build -f $1 -t FYLSunghwan/2048pp:$2 .
 fi
 
-docker run FYLSunghwan/2048pp
+docker run fylunghwan/2048pp
