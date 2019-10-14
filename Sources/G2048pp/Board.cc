@@ -8,7 +8,8 @@ Board::Board(int rowSize, int colSize)
     totScore = 0;
     m_rowSize = rowSize;
     m_colSize = colSize;
-    m_board.resize(rowSize * colSize, nullptr);
+    const int totalSize = rowSize * colSize;
+    m_board.resize(totalSize, nullptr);
 }
 
 Board::~Board()
